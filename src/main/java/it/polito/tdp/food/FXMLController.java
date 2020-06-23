@@ -29,7 +29,7 @@ public class FXMLController {
     private Button btnCreaGrafo;
 
     @FXML
-    private ComboBox<?> boxIngrediente;
+    private ComboBox<Condimento> boxIngrediente;
 
     @FXML
     private Button btnDietaEquilibrata;
@@ -39,6 +39,14 @@ public class FXMLController {
 
     @FXML
     void doCalcolaDieta(ActionEvent event) {
+    	this.txtResult.clear();
+    	this.txtResult.appendText("Dieta equilibrata: \n");
+    	Condimento c = this.boxIngrediente.getValue();
+    	for(Condimento cond : model.ingredientiIndipendenti(c)) {
+    		this.txtResult.appendText(cond.toString()+"\n");
+    	}
+    	
+    	this.txtResult.appendText("Calorie: "+model.getCalorieMax());
 
     }
 
@@ -60,6 +68,13 @@ public class FXMLController {
     	}catch(NumberFormatException nfe) {
     		this.txtResult.appendText("Inserisci valore corretto");
     	}
+    	
+    	//popolo tendina con duplicati
+    	
+    	this.boxIngrediente.getItems().clear();
+    	this.boxIngrediente.getItems().addAll(model.listaVertici());
+    	this.boxIngrediente.setValue(model.listaVertici().get(0));
+    	
 
     }
 

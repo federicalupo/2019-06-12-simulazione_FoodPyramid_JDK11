@@ -56,7 +56,7 @@ public class Condimento implements Comparable<Condimento>{
 
 	@Override
 	public String toString() {
-		return  codice + " " + calorie ;
+		return  codice +"" ;
 	}
 	
 	
